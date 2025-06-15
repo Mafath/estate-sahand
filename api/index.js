@@ -23,3 +23,14 @@ app.listen(3000, () => {
 
 app.use("/api/user", userRouter); // Using user routes
 app.use("/api/auth", authRouter); // Using user routes
+
+//middleware
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message
+  }); //statusCode : statusCode kyla thama mehi ennona. but es6 ekt psse key ekai valui ektai ekama nama tynwn nm mehem key ek witrk danna plwn. message ekth ehemmai krl tyenne
+});
